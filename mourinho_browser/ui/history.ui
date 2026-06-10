@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HistoryDialog</class>
+ <widget class="QDialog" name="HistoryDialog">
+  <property name="windowTitle">
+   <string>History</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

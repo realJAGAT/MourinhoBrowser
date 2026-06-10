@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DownloadsDialog</class>
+ <widget class="QDialog" name="DownloadsDialog">
+  <property name="windowTitle">
+   <string>Downloads</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

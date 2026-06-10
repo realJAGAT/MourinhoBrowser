@@ -1,0 +1,14 @@
+QWidget {
+    background-color: #1a160f;
+    color: #f7e7b1;
+}
+QLineEdit, QListWidget, QTextEdit {
+    background-color: rgba(42, 32, 14, 0.9);
+    border: 1px solid #b88f3d;
+    border-radius: 10px;
+}
+QPushButton {
+    background-color: #b88f3d;
+    color: #1a160f;
+    border-radius: 10px;
+}

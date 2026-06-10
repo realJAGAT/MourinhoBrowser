@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DashboardDialog</class>
+ <widget class="QDialog" name="DashboardDialog">
+  <property name="windowTitle">
+   <string>Tactical Dashboard</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

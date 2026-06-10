@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PowerDialogue</class>
+ <widget class="QDialog" name="PowerDialogue">
+  <property name="windowTitle">
+   <string>Power Dialogue</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

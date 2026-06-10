@@ -1,0 +1,102 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS settings (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS bookmarks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    url TEXT NOT NULL,
+    folder_id INTEGER,
+    tags TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(folder_id) REFERENCES bookmark_folders(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS bookmark_folders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    parent_id INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(parent_id) REFERENCES bookmark_folders(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    url TEXT NOT NULL,
+    title TEXT,
+    visit_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    duration_seconds INTEGER DEFAULT 0,
+    visit_count INTEGER DEFAULT 1,
+    last_visit DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS downloads (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    url TEXT NOT NULL,
+    filename TEXT NOT NULL,
+    destination TEXT NOT NULL,
+    status TEXT NOT NULL,
+    progress INTEGER DEFAULT 0,
+    started_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS workspaces (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT,
+    payload TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS extensions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    origin TEXT NOT NULL,
+    permissions TEXT,
+    enabled INTEGER NOT NULL DEFAULT 1,
+    installed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS achievements (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    key TEXT NOT NULL UNIQUE,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    unlocked INTEGER NOT NULL DEFAULT 0,
+    unlocked_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS tabs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    url TEXT NOT NULL,
+    pinned INTEGER NOT NULL DEFAULT 0,
+    group_name TEXT,
+    last_active DATETIME DEFAULT CURRENT_TIMESTAMP,
+    health_score INTEGER DEFAULT 100,
+    cpu_score INTEGER DEFAULT 0,
+    ram_score INTEGER DEFAULT 0,
+    responsive INTEGER DEFAULT 1,
+    benched INTEGER DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS assistant_notes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    page_url TEXT,
+    note TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_history_url ON history(url);
+CREATE INDEX IF NOT EXISTS idx_bookmarks_url ON bookmarks(url);
+CREATE INDEX IF NOT EXISTS idx_workspaces_name ON workspaces(name);
+CREATE INDEX IF NOT EXISTS idx_extensions_origin ON extensions(origin);
+CREATE INDEX IF NOT EXISTS idx_tabs_group ON tabs(group_name);
